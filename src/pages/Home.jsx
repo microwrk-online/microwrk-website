@@ -83,6 +83,7 @@ const Home = () => {
       <Analytics />
       <h1 className="text-4xl font-mono mb-8 text-center text-blue-600">
         YouTube Chapter Downloader
+        <GoogleAd />
       </h1>
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
         <div className="flex gap-2 mb-4">
@@ -100,10 +101,6 @@ const Home = () => {
           >
             {loading ? "Loading..." : "Fetch Chapters"}
           </button>
-        </div>
-        <div>
-          {" "}
-          <GoogleAd />
         </div>
         {loading && <LoadingBar progress={loadingProgress} />}
         {error && <p className="text-red-500">{error}</p>}
