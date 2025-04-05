@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "../index.css";
 import GoogleAd from "../components/GoogleAd";
@@ -29,12 +29,10 @@ const Home = () => {
 
   const streamProgress = () => {
     const eventSource = new EventSource(`${BACKEND_URL}/api/progress`);
-
     eventSource.onmessage = (event) => {
       console.log("SSE Message:", event.data);
       setLoadingText(event.data);
     };
-
     eventSource.onerror = (error) => {
       console.error("SSE Error:", error);
       eventSource.close();
@@ -64,7 +62,9 @@ const Home = () => {
       setLoadingText("Conversion complete!");
     } catch (err) {
       console.error("Error:", err);
-      setError("Failed to fetch chapters.");
+      setError(
+        "Failed to fetch chapters. This video may require sign-in or age confirmation. Please try a different video."
+      );
       setLoadingText("Error occurred.");
     } finally {
       setLoading(false);
@@ -85,6 +85,7 @@ const Home = () => {
         YouTube Chapter Downloader
         <GoogleAd />
       </h1>
+
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
         <div className="flex gap-2 mb-4">
           <input
@@ -102,8 +103,10 @@ const Home = () => {
             {loading ? "Loading..." : "Fetch Chapters"}
           </button>
         </div>
+
         {loading && <LoadingBar progress={loadingProgress} />}
         {error && <p className="text-red-500">{error}</p>}
+
         {videoTitle && (
           <div className="mb-4 text-center">
             <h2 className="text-xl font-semibold text-gray-900">
@@ -126,6 +129,7 @@ const Home = () => {
             )}
           </div>
         )}
+
         {chapters.length > 0 && (
           <div className="mt-4">
             <h2 className="text-xl font-semibold mb-4 text-gray-900">
