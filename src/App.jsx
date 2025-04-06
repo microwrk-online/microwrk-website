@@ -3,7 +3,9 @@ import Home from "../src/pages/Home";  // ✅ Importing Home correctly
 
 const App = () => {
   return (
-     <Home />
+    <div className="min-h-screen bg-gray-900">
+      <Home />
+    </div>
   );
 };
 
