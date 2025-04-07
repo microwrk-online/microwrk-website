@@ -1,9 +1,11 @@
 import React from "react";
 import "./index.css"; // Import the index.css where Tailwind CSS is set up
 
+const BACKEND_URL = "http://127.0.0.1:8000";
+
 const DownloadButton = ({ filename, label }) => {
   const handleDownload = () => {
-    window.open(`http://localhost:8000${filename}`, "_blank");
+    window.open(`${BACKEND_URL}${filename}`, "_blank");
   };
 
   return (

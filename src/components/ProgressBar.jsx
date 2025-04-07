@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
 
+const BACKEND_URL = "http://127.0.0.1:8000";
+
 const ProgressBar = () => {
   const [logs, setLogs] = useState([]);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const eventSource = new EventSource("http://localhost:8000/api/progress");
+    const eventSource = new EventSource("${BACKEND_URL}/api/progress");
 
     eventSource.onmessage = (event) => {
       const log = event.data;

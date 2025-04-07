@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./index.css"; // Import the index.css where Tailwind CSS is set up
 
+const BACKEND_URL = "http://127.0.0.1:8000";
+
 const VideoInput = ({ onChaptersFetched }) => {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ const VideoInput = ({ onChaptersFetched }) => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:8000/api/extract", {
+      const response = await axios.post("${BACKEND_URL}/api/extract", {
         url,
       });
       onChaptersFetched(response.data);
