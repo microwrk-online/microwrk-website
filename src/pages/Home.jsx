@@ -1,6 +1,5 @@
 import React, { useState, Suspense } from "react";
 import axios from "axios";
-import { Helmet } from "react-helmet-async";
 import debounce from "lodash.debounce";
 import { Analytics } from "@vercel/analytics/react";
 import {
@@ -86,7 +85,6 @@ const Home = () => {
       <Analytics />
 
       {/* SEO Meta Tags */}
-      <Helmet>
         <title>
           {videoTitle
             ? `${videoTitle} - YouTube Chapter Downloader`
@@ -122,7 +120,6 @@ const Home = () => {
           content="YouTube chapter downloader, download YouTube chapters, YouTube thumbnail downloader, YT downloader, download MP4, download MP3"
         />
         <meta name="robots" content="index, follow" />
-      </Helmet>
 
       <div className="container mx-auto px-4 py-12">
         {/* Header Section */}
