@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from "react";
 import axios from "axios";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import debounce from "lodash.debounce";
 import { Analytics } from "@vercel/analytics/react";
 import {
@@ -128,11 +128,12 @@ const Home = () => {
         {/* Header Section */}
         <div className="flex flex-col items-center justify-center mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <YoutubeIcon className="h-10 w-10 text-red-500" />
+            <YoutubeIcon className="h-10 w-10 text-red-500" />{" "}
             <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
               YouTube Chapter Downloader
             </h1>
           </div>
+
           <p className="text-lg text-gray-300 max-w-2xl text-center">
             Download individual chapters, MP3s, MP4s, and thumbnails from any
             YouTube video in seconds
@@ -153,6 +154,7 @@ const Home = () => {
                   <YoutubeIcon className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
+                  id="input-field"
                   autoFocus
                   type="text"
                   className="w-full pl-10 p-4 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
