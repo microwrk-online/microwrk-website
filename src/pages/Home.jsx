@@ -1,85 +1,85 @@
-
-import React, { useState, Suspense } from "react"
-import axios from "axios"
-import { Helmet } from "react-helmet"
-import debounce from "lodash.debounce"
-import { Analytics } from "@vercel/analytics/react"
-import { YoutubeIcon, Download, FileVideo, Music, Image, Clock, HardDrive } from "lucide-react"
+import React, { useState, Suspense } from "react";
+import axios from "axios";
+import { Helmet } from "react-helmet";
+import debounce from "lodash.debounce";
+import { Analytics } from "@vercel/analytics/react";
+import {
+  YoutubeIcon,
+  Download,
+  FileVideo,
+  Music,
+  Image,
+  Clock,
+  HardDrive,
+} from "lucide-react";
 
 // Lazy loading components
-const GoogleAd = React.lazy(() => import("../components/GoogleAd"))
+const GoogleAd = React.lazy(() => import("../components/GoogleAd"));
 
-const BACKEND_URL = "https://youtube-chapter-download-backend.onrender.com"
+const BACKEND_URL = "http://127.0.0.1:8000";
 
 const LoadingBar = ({ progress }) => {
-  return (
-    <div className="w-full bg-gray-700 rounded-full h-2.5 mt-4 overflow-hidden">
-      <div
-        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
-        style={{ width: `${progress}%` }}
-      />
-    </div>
-  )
-}
+  return <div></div>;
+};
 
 const Home = () => {
-  const [url, setUrl] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [loadingProgress, setLoadingProgress] = useState(0)
-  const [loadingText, setLoadingText] = useState("Starting...")
-  const [error, setError] = useState("")
-  const [chapters, setChapters] = useState([])
-  const [videoTitle, setVideoTitle] = useState("")
-  const [videoThumbnail, setVideoThumbnail] = useState("")
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingText, setLoadingText] = useState("Starting...");
+  const [error, setError] = useState("");
+  const [chapters, setChapters] = useState([]);
+  const [videoTitle, setVideoTitle] = useState("");
+  const [videoThumbnail, setVideoThumbnail] = useState("");
 
   // Debounced function to handle input change without triggering API calls too often
   const handleFetchChapters = debounce(async () => {
     if (!url) {
-      setError("Please enter a YouTube URL.")
-      return
+      setError("Please enter a YouTube URL.");
+      return;
     }
 
-    setLoading(true)
-    setError("")
-    setLoadingProgress(0)
-    setLoadingText("Preparing conversion...")
+    setLoading(true);
+    setError("");
+    setLoadingProgress(0);
+    setLoadingText("Preparing conversion...");
 
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/extract`, { url })
-      setVideoTitle(response.data.title)
-      setVideoThumbnail(response.data.thumbnail)
-      setChapters(response.data.chapters)
-      setLoadingProgress(100)
-      setLoadingText("Conversion complete!")
+      const response = await axios.post(`${BACKEND_URL}/api/extract`, { url });
+      setVideoTitle(response.data.title);
+      setVideoThumbnail(response.data.thumbnail);
+      setChapters(response.data.chapters);
+      setLoadingProgress(100);
+      setLoadingText("Conversion complete!");
     } catch (err) {
-      //console.error("Error:", err)
-      setError("Failed to fetch chapters. Please check the URL and try again.")
-      setLoadingText("Error occurred.")
+      console.error("Error:", err);
+      setError("Failed to fetch chapters. Please check the URL and try again.");
+      setLoadingText("Error occurred.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, 500)
+  }, 500);
 
   const downloadThumbnail = () => {
-    const link = document.createElement("a")
-    link.href = videoThumbnail
-    link.download = "thumbnail.jpg"
-    link.click()
-  }
+    const link = document.createElement("a");
+    link.href = videoThumbnail;
+    link.download = "thumbnail.jpg";
+    link.click();
+  };
 
   // Stream progress updates (eventsource for backend communication)
   const streamProgress = () => {
-    const eventSource = new EventSource(`${BACKEND_URL}/api/progress`)
+    const eventSource = new EventSource(`${BACKEND_URL}/api/progress`);
     eventSource.onmessage = (event) => {
       //console.log("SSE Message:", event.data)
-      setLoadingText(event.data)
-    }
+      setLoadingText(event.data);
+    };
 
     eventSource.onerror = (error) => {
       //console.error("SSE Error:", error)
-      eventSource.close()
-    }
-  }
+      eventSource.close();
+    };
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
@@ -87,21 +87,35 @@ const Home = () => {
 
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>{videoTitle ? `${videoTitle} - YouTube Chapter Downloader` : "YouTube Chapter Downloader"}</title>
+        <title>
+          {videoTitle
+            ? `${videoTitle} - YouTube Chapter Downloader`
+            : "YouTube Chapter Downloader"}
+        </title>
         <meta
           name="description"
           content={
-            videoTitle ? `Download chapters for the video "${videoTitle}"` : "Download YouTube chapters for free"
+            videoTitle
+              ? `Download chapters for the video "${videoTitle}"`
+              : "Download YouTube chapters for free"
           }
         />
-        <meta property="og:title" content={videoTitle || "YouTube Chapter Downloader"} />
+        <meta
+          property="og:title"
+          content={videoTitle || "YouTube Chapter Downloader"}
+        />
         <meta
           property="og:description"
           content={
-            videoTitle ? `Download chapters for the video "${videoTitle}"` : "Download YouTube chapters for free"
+            videoTitle
+              ? `Download chapters for the video "${videoTitle}"`
+              : "Download YouTube chapters for free"
           }
         />
-        <meta property="og:image" content={videoThumbnail || "/default-thumbnail.jpg"} />
+        <meta
+          property="og:image"
+          content={videoThumbnail || "/default-thumbnail.jpg"}
+        />
         <meta property="og:url" content={window.location.href} />
         <meta
           name="keywords"
@@ -120,10 +134,11 @@ const Home = () => {
             </h1>
           </div>
           <p className="text-lg text-gray-300 max-w-2xl text-center">
-            Download individual chapters, MP3s, MP4s, and thumbnails from any YouTube video in seconds
+            Download individual chapters, MP3s, MP4s, and thumbnails from any
+            YouTube video in seconds
           </p>
 
-          <Suspense fallback={<div className="mt-4 p-2 bg-gray-800 rounded-md">Loading Google Ad...</div>}>
+          <Suspense fallback={<div className="h-16" />}>
             <GoogleAd />
           </Suspense>
         </div>
@@ -138,12 +153,13 @@ const Home = () => {
                   <YoutubeIcon className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
+                  autoFocus
                   type="text"
                   className="w-full pl-10 p-4 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="Paste YouTube Video URL here..."
                   value={url}
                   onChange={(e) => {
-                    setUrl(e.target.value)
+                    setUrl(e.target.value);
                   }}
                 />
               </div>
@@ -185,14 +201,20 @@ const Home = () => {
           {/* Video Information */}
           {videoTitle && (
             <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 mb-8 overflow-hidden">
-              <h2 className="text-2xl font-bold mb-4 text-white">{videoTitle}</h2>
+              <h2 className="text-2xl font-bold mb-4 text-white">
+                {videoTitle}
+              </h2>
 
               {videoThumbnail && (
                 <div className="flex flex-col items-center">
                   <div className="relative w-full rounded-lg overflow-hidden shadow-xl mb-4">
                     <img
                       src={videoThumbnail || "/placeholder.svg"}
-                      alt={videoTitle ? `Thumbnail of ${videoTitle}` : "Video Thumbnail"}
+                      alt={
+                        videoTitle
+                          ? `Thumbnail of ${videoTitle}`
+                          : "Video Thumbnail"
+                      }
                       className="w-full h-auto object-cover"
                       loading="lazy"
                     />
@@ -215,7 +237,9 @@ const Home = () => {
             <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 mb-8">
               <div className="flex items-center gap-2 mb-6">
                 <Clock className="h-6 w-6 text-blue-400" />
-                <h2 className="text-2xl font-bold text-white">Available Chapters</h2>
+                <h2 className="text-2xl font-bold text-white">
+                  Available Chapters
+                </h2>
               </div>
 
               <div className="space-y-4">
@@ -226,7 +250,9 @@ const Home = () => {
                   >
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                       <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-white mb-1">{chapter.title}</h3>
+                        <h3 className="text-lg font-semibold text-white mb-1">
+                          {chapter.title}
+                        </h3>
                         <div className="flex items-center gap-4 text-sm text-gray-300">
                           <div className="flex items-center gap-1">
                             <Clock className="h-4 w-4" />
@@ -272,17 +298,24 @@ const Home = () => {
                 Welcome to the YouTube Chapter Downloader
               </h2>
               <p className="text-lg mb-6 text-gray-300 leading-relaxed">
-                Our YouTube Chapter Downloader tool helps you easily download chapters, MP4s, and MP3s from any YouTube
-                video. Whether you're looking to extract individual sections or just download YouTube video chapters for
-                easier access, we've got you covered. Our easy-to-use tool is completely free, and we ensure fast and
+                Our YouTube Chapter Downloader tool helps you easily download
+                chapters, MP4s, and MP3s from any YouTube video. Whether you're
+                looking to extract individual sections or just download YouTube
+                video chapters for easier access, we've got you covered. Our
+                easy-to-use tool is completely free, and we ensure fast and
                 reliable downloads for your convenience.
               </p>
-              <h3 className="text-2xl font-bold mb-4 text-white">How to Use Our YouTube Chapter Downloader</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white">
+                How to Use Our YouTube Chapter Downloader
+              </h3>
               <p className="mb-6 text-gray-300 leading-relaxed">
-                Simply paste the URL of the YouTube video you want to download chapters from. Our tool will
-                automatically fetch the chapters and provide you with the option to download them in MP4 or MP3 formats.
-                We also offer the ability to download the video thumbnail with a single click. This makes it the perfect
-                tool for anyone creating content or wanting to get a quick summary of a YouTube video.
+                Simply paste the URL of the YouTube video you want to download
+                chapters from. Our tool will automatically fetch the chapters
+                and provide you with the option to download them in MP4 or MP3
+                formats. We also offer the ability to download the video
+                thumbnail with a single click. This makes it the perfect tool
+                for anyone creating content or wanting to get a quick summary of
+                a YouTube video.
               </p>
             </div>
             <div className="order-1 lg:order-2">
@@ -298,21 +331,28 @@ const Home = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-16">
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-white">Why Choose Our Tool?</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white">
+                Why Choose Our Tool?
+              </h3>
               <p className="mb-6 text-gray-300 leading-relaxed">
-                With our YouTube Chapter Downloader, you can save time by downloading only the sections you need from a
-                video. Whether you're working on content creation, research, or just organizing your favorite videos,
-                our tool is designed for speed and convenience. Plus, you can download the video thumbnail to make your
-                content stand out.
+                With our YouTube Chapter Downloader, you can save time by
+                downloading only the sections you need from a video. Whether
+                you're working on content creation, research, or just organizing
+                your favorite videos, our tool is designed for speed and
+                convenience. Plus, you can download the video thumbnail to make
+                your content stand out.
               </p>
               <p className="mb-6 text-gray-300 leading-relaxed">
-                We offer a fast and easy-to-use solution that works across all devices. Simply enter the URL, click on
-                the download button, and enjoy the content without any hassle. Say goodbye to long videos and start
-                downloading YouTube chapters and thumbnails today!
+                We offer a fast and easy-to-use solution that works across all
+                devices. Simply enter the URL, click on the download button, and
+                enjoy the content without any hassle. Say goodbye to long videos
+                and start downloading YouTube chapters and thumbnails today!
               </p>
             </div>
             <div className="bg-gray-800 p-8 rounded-xl border border-gray-700 shadow-lg">
-              <h3 className="text-2xl font-bold mb-6 text-white">Key Features:</h3>
+              <h3 className="text-2xl font-bold mb-6 text-white">
+                Key Features:
+              </h3>
               <ul className="space-y-4 mb-6">
                 {[
                   "Download individual YouTube chapters",
@@ -323,8 +363,18 @@ const Home = () => {
                 ].map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-1 rounded-full mt-1">
-                      <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      <svg
+                        className="h-4 w-4 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
                       </svg>
                     </div>
                     <span className="text-gray-200">{feature}</span>
@@ -332,17 +382,17 @@ const Home = () => {
                 ))}
               </ul>
               <p className="text-lg text-gray-300">
-                Whether you're a content creator, a researcher, or simply someone who loves YouTube, our YouTube Chapter
-                Downloader is the perfect tool for you. Start using it today and experience a better way to download
-                YouTube chapters and thumbnails.
+                Whether you're a content creator, a researcher, or simply
+                someone who loves YouTube, our YouTube Chapter Downloader is the
+                perfect tool for you. Start using it today and experience a
+                better way to download YouTube chapters and thumbnails.
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
-
+export default Home;
