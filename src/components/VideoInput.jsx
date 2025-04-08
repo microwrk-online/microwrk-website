@@ -19,7 +19,7 @@ const VideoInput = ({ onChaptersFetched }) => {
     setError("");
 
     try {
-      const response = await axios.post("${BACKEND_URL}/api/extract", {
+      const response = await axios.post(`${BACKEND_URL}/api/extract`, {
         url,
       });
       onChaptersFetched(response.data);

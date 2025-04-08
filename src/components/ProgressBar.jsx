@@ -8,7 +8,7 @@ const ProgressBar = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const eventSource = new EventSource("${BACKEND_URL}/api/progress");
+    const eventSource = new EventSource(`${BACKEND_URL}/api/progress`);
 
     eventSource.onmessage = (event) => {
       const log = event.data;

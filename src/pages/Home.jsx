@@ -127,7 +127,7 @@ const Home = () => {
           <div className="flex items-center gap-3 mb-4">
             <YoutubeIcon className="h-10 w-10 text-red-500" />{" "}
             <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-              YouTube Chapter Downloader
+              YouTube Chapter Downloader https://youtu.be/v7BNtpw53AA
             </h1>
           </div>
 
