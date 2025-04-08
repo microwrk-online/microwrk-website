@@ -1,6 +1,6 @@
 import React from "react";
 import DownloadButton from "./DownloadButton";
-import "./index.css"; // Import the index.css where Tailwind CSS is set up
+// import "../index.css"; // Import the index.css where Tailwind CSS is set up
 
 const ChapterList = ({ chapters, files }) => {
   return (
