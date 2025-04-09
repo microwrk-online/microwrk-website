@@ -15,7 +15,7 @@ import {
 // Lazy loading components
 const GoogleAd = React.lazy(() => import("../components/GoogleAd"));
 
-const BACKEND_URL = "http://127.0.0.1:8000";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const LoadingBar = ({ progress }) => {
   return <div></div>;
@@ -62,7 +62,7 @@ const Home = () => {
   const downloadThumbnail = () => {
     const link = document.createElement("a");
     link.href = videoThumbnail;
-    link.download = "thumbnail.jpg";
+    link.download = "./thumbnail.jpg";
     link.click();
   };
 
@@ -85,41 +85,41 @@ const Home = () => {
       <Analytics />
 
       {/* SEO Meta Tags */}
-        <title>
-          {videoTitle
-            ? `${videoTitle} - YouTube Chapter Downloader`
-            : "YouTube Chapter Downloader"}
-        </title>
-        <meta
-          name="description"
-          content={
-            videoTitle
-              ? `Download chapters for the video "${videoTitle}"`
-              : "Download YouTube chapters for free"
-          }
-        />
-        <meta
-          property="og:title"
-          content={videoTitle || "YouTube Chapter Downloader"}
-        />
-        <meta
-          property="og:description"
-          content={
-            videoTitle
-              ? `Download chapters for the video "${videoTitle}"`
-              : "Download YouTube chapters for free"
-          }
-        />
-        <meta
-          property="og:image"
-          content={videoThumbnail || "/default-thumbnail.jpg"}
-        />
-        <meta property="og:url" content={window.location.href} />
-        <meta
-          name="keywords"
-          content="YouTube chapter downloader, download YouTube chapters, YouTube thumbnail downloader, YT downloader, download MP4, download MP3"
-        />
-        <meta name="robots" content="index, follow" />
+      <title>
+        {videoTitle
+          ? `${videoTitle} - YouTube Chapter Downloader`
+          : "YouTube Chapter Downloader"}
+      </title>
+      <meta
+        name="description"
+        content={
+          videoTitle
+            ? `Download chapters for the video "${videoTitle}"`
+            : "Download YouTube chapters for free"
+        }
+      />
+      <meta
+        property="og:title"
+        content={videoTitle || "YouTube Chapter Downloader"}
+      />
+      <meta
+        property="og:description"
+        content={
+          videoTitle
+            ? `Download chapters for the video "${videoTitle}"`
+            : "Download YouTube chapters for free"
+        }
+      />
+      <meta
+        property="og:image"
+        content={videoThumbnail || "/default-thumbnail.jpg"}
+      />
+      <meta property="og:url" content={window.location.href} />
+      <meta
+        name="keywords"
+        content="YouTube chapter downloader, download YouTube chapters, YouTube thumbnail downloader, YT downloader, download MP4, download MP3"
+      />
+      <meta name="robots" content="index, follow" />
 
       <div className="container mx-auto px-4 py-12">
         {/* Header Section */}
@@ -221,6 +221,7 @@ const Home = () => {
                   </div>
                   <button
                     onClick={downloadThumbnail}
+                    downloadThumbnail
                     className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 flex items-center gap-2 shadow-lg"
                   >
                     <Image className="h-5 w-5" />
