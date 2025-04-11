@@ -5,7 +5,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Home from "../src/pages/Home";
+// import Home from "../src/pages/Home";
+import Home from "../src/pages/Home-new";
 
 // Custom hook to send page views to GA4
 const usePageTracking = () => {
