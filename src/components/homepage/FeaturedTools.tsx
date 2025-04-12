@@ -1,6 +1,5 @@
 // components/homepage/FeaturedTools.tsx
 
-import React from "react";
 
 const tools = [
   {

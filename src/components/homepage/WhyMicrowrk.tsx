@@ -1,7 +1,5 @@
 // components/homepage/WhyMicrowrk.tsx
 
-import React from "react";
-
 const features = [
   { emoji: "✅", text: "No signup required" },
   { emoji: "🚀", text: "Lightweight and fast" },

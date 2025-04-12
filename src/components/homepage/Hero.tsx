@@ -1,4 +1,3 @@
-import React from "react";
 import { FaLock, FaRobot, FaRocket } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 import Particles from "react-tsparticles";
