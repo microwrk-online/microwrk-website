@@ -7,14 +7,12 @@ import WhyMicrowrk from "./components/homepage/WhyMicrowrk";
 import PrivacyPolicy from "./components/footercontents/Privacy";
 import TermsOfService from "./components/footercontents/Terms";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 function App() {
   return (
     <>
       {/* Vercel Analytics */}
       <Analytics />
-      <SpeedInsights />
 
       <Routes>
         <Route
