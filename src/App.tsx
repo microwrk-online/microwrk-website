@@ -7,6 +7,7 @@ import WhyMicrowrk from "./components/homepage/WhyMicrowrk";
 import PrivacyPolicy from "./components/footercontents/Privacy";
 import TermsOfService from "./components/footercontents/Terms";
 import { Analytics } from "@vercel/analytics/react";
+import YouTubeChapterDownloader from "./components/yt-downloader/YouTubeChapterDownloader";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
         />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/YouTubeChapterDownloader" element={<YouTubeChapterDownloader />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </>
   );
