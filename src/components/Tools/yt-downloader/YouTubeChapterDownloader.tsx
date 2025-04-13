@@ -1,7 +1,7 @@
 import type React from "react"
 // @ts-ignore this is base layout file we can add the change after the backend is ready for this
 import { useState } from "react"
-import { Download, Loader2, CheckCircle2 } from "lucide-react"
+import { Download, Loader2 } from "lucide-react"
 
 interface Chapter {
   title: string
