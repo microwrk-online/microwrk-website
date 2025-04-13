@@ -3,10 +3,10 @@
 
 const tools = [
   {
-    title: "💻 Telegram Bot Panel",
-    description: "Control your PC remotely using Telegram: take screenshots, upload files, and more.",
+    title: "📸 instagram meme generator",
+    description: "Create eye-catching memes and stylish Instagram posts with editable text, backgrounds, colors, and more. Perfect for content creators and social media managers.",
     status: "Live",
-    link: "/tools/telegram-panel",
+    link: "/tools/InstagramPostGenerator",
   },
   {
     title: "⏰ Daily Reminder Bot",
