@@ -9,7 +9,10 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 bg-neutral-900 text-white overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center px-6 bg-neutral-900 text-white overflow-hidden"
+    >
       {/* Particle Background */}
       {/* Floating Icons */}
       <div className="absolute top-10 left-5 text-[#00ffcc] opacity-10 text-5xl animate-bounce-slow">
@@ -89,12 +92,18 @@ const Hero = () => {
         </div> */}
 
         {/* CTA */}
-        <a
-          href="#tools"
+        <button
+          onClick={() => {
+            const section = document.getElementById("tools");
+            if (section) {
+              section.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
           className="inline-block px-8 py-3 bg-[#00ffcc] text-black font-semibold rounded-lg shadow-lg hover:scale-105 transition transform duration-300"
         >
           Browse Tools
-        </a>
+        </button>
+
         {/* Scroll down button */}
         {/* <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
           <a href="#tools">

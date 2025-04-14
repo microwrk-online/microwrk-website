@@ -22,9 +22,15 @@ function App() {
           element={
             <>
               <Navbar />
-              <Hero />
-              <Tools />
-              <WhyMicrowrk />
+              <section id="hero">
+                <Hero />
+              </section>
+              <section id="tools">
+                <Tools />
+              </section>
+              <section id="why">
+                <WhyMicrowrk />
+              </section>
               <Footer />
             </>
           }
