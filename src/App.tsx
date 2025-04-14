@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/homepage/Navbar";
 import Hero from "./components/homepage/Hero";
-import FeaturedTools from "./components/homepage/FeaturedTools";
+import Tools from "./components/homepage/Tools";
 import Footer from "./components/homepage/Footer";
 import WhyMicrowrk from "./components/homepage/WhyMicrowrk";
 import PrivacyPolicy from "./components/footercontents/Privacy";
@@ -22,7 +22,7 @@ function App() {
             <>
               <Navbar />
               <Hero />
-              <FeaturedTools />
+              <Tools />
               <WhyMicrowrk />
               <Footer />
             </>
@@ -30,7 +30,7 @@ function App() {
         />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
-        <Route path="/YouTubeChapterDownloader" element={<YouTubeChapterDownloader />} />
+        <Route path="/youtube-chapter-downloader" element={<YouTubeChapterDownloader />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </>
