@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import logo from "../../assets/microwrk-logo.svg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,9 +21,10 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <a
           href="/#"
-          className="text-2xl font-bold text-[#00ffcc] tracking-tight"
+          className="text-2xl font-bold text-[#00ffcc] tracking-tight flex items-center"
         >
-          microwrk.online
+          <img src={logo} alt="" className="w-10 h-10 mr-2 self-center" />
+          microwrk
         </a>
 
         {/* Desktop Nav */}

@@ -1,13 +1,9 @@
 import type React from "react";
 // @ts-ignore this is base layout file we can add the change after the backend is ready for this
-<<<<<<< HEAD:src/components/yt-downloader/YouTubeChapterDownloader.tsx
 import { useState } from "react";
+import Navbar from "../../homepage/Navbar";
+
 import { Download, Loader2 } from "lucide-react";
-import Navbar from "../homepage/Navbar";
-=======
-import { useState } from "react"
-import { Download, Loader2 } from "lucide-react"
->>>>>>> b024619db86a41c8824f8aa6df69795c28ec0256:src/components/Tools/yt-downloader/YouTubeChapterDownloader.tsx
 
 interface Chapter {
   title: string;

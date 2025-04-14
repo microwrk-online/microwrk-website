@@ -2,18 +2,18 @@
 
 const tools = [
   {
-<<<<<<< HEAD:src/components/homepage/Tools.tsx
     title: "💻 Telegram Bot Panel",
     description:
       "Control your PC remotely using Telegram: take screenshots, upload files, and more.",
     status: "Coming Soon",
     link: "", //we can use "/tools/telegram-panel" after making more tools in future
-=======
-    title: "📸 instagram meme generator",
-    description: "Create eye-catching memes and stylish Instagram posts with editable text, backgrounds, colors, and more. Perfect for content creators and social media managers.",
+  },
+  {
+    title: "📸 Instagram Post Generator",
+    description:
+      "Create eye-catching memes and stylish Instagram posts with editable text, backgrounds, colors, and more. Perfect for content creators and social media managers.",
     status: "Live",
-    link: "/tools/InstagramPostGenerator",
->>>>>>> b024619db86a41c8824f8aa6df69795c28ec0256:src/components/homepage/FeaturedTools.tsx
+    link: "/instagram-post-generator",
   },
   {
     title: "⏰ Daily Reminder Bot",

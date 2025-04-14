@@ -80,13 +80,13 @@ const Hero = () => {
         </p>
 
         {/* Command Input */}
-        <div className="relative max-w-md mx-auto mb-6">
+        {/* <div className="relative max-w-md mx-auto mb-6">
           <input
             type="text"
             placeholder='Try typing "Reminder Bot"...'
             className="w-full px-5 py-3 text-black rounded-lg bg-white/90 focus:outline-none focus:ring-2 focus:ring-[#00ffcc] placeholder:text-gray-600 font-mono shadow-lg"
           />
-        </div>
+        </div> */}
 
         {/* CTA */}
         <a
@@ -95,6 +95,16 @@ const Hero = () => {
         >
           Browse Tools
         </a>
+        {/* Scroll down button */}
+        {/* <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
+          <a href="#tools">
+            <button
+              className="animate-bounce-slow bg-[#00ffcc] p-2 rounded-full shadow-lg"
+            >
+              <FaRocket className="text-white" />
+            </button>
+          </a>
+        </div> */}
       </div>
     </section>
   );
