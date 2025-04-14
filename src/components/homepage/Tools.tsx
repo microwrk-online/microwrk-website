@@ -31,7 +31,19 @@ const tools = [
     title: "🎥 YouTube Chapter Downloader",
     description: "Download YouTube videos chapter-wise or full.",
     status: "Live",
-    link: "/youtubechapterdownloader/",
+    link: "/youtube-chapter-downloader",
+  },
+  {
+    title: "🎥 Instagram Reels and Thumbnail Downloader",
+    description: ".",
+    status: "Coming Soon",
+    link: "",
+  },
+  {
+    title: "🎥 Trending Music and Memes",
+    description: ".",
+    status: "Coming Soon",
+    link: "",
   },
 ];
 

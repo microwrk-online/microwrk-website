@@ -10,7 +10,7 @@ const Navbar = () => {
     { name: "Home", href: "hero" },
     { name: "Tools", href: "tools" },
     { name: "Why Microwrk", href: "why" },
-  ];
+  ]; //contents in this 
 
   const externalNavLinks = [
     {

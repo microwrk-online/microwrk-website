@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import Navbar from "../../homepage/Navbar";
+import Footer from "../../homepage/Footer";
 
 type TextBox = {
   text: string;
@@ -51,7 +52,7 @@ const hexToRgba = (hex: string, opacity: number) => {
 };
 
 const defaultTextBox: TextBox = {
-  text: "Your caption here",
+  text: "Caption here",
   positionPercent: 80,
   showBackground: false,
   backgroundColor: "#000000",
@@ -160,6 +161,12 @@ const InstagramPostGenerator = () => {
     setTextBoxes([...textBoxes, { ...defaultTextBox }]);
   };
 
+  const handleRemoveTextBox = (index: number) => {
+    if (textBoxes.length > 1) {
+      setTextBoxes((prev) => prev.filter((_, i) => i !== index));
+    }
+  };
+
   const updateBox = <K extends keyof TextBox>(
     index: number,
     key: K,
@@ -174,9 +181,9 @@ const InstagramPostGenerator = () => {
     const template = memeTemplates[index];
     setBgImage(template.url);
     setTextBoxes(
-      template.positions.map((p, i) => ({
+      template.positions.map((p, _i) => ({
         ...defaultTextBox,
-        text: i === 0 ? template.defaultCaption : `Text ${i + 1}`,
+        // text: i === 0 ? template.defaultCaption : `Text ${i + 1}`,
         positionPercent: p,
       }))
     );
@@ -185,195 +192,213 @@ const InstagramPostGenerator = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center gap-4 p-6 bg-[#0f0f0f] min-h-screen text-white">
-        <header className="text-center max-w-xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-[#00ffcc]">
-            Create Custom Instagram & Meme Posts Instantly
-          </h2>
-          <p className="text-gray-400 text-sm md:text-base">
-            Design eye-catching memes or stylish Instagram posts with editable
-            text, backgrounds, colors, and more. Perfect for content creators
-            and social media managers.
-          </p>
-        </header>
-        <h1 className="text-[#00ffcc] text-3xl font-bold mb-4">
-          📸 Meme Generator with Custom Text Backgrounds
-        </h1>
+      <div className="bg-[#0b0b0c] text-white font-inter min-h-[86.5vh] px-4 pt-8">
+        <div className="max-w-screen-xl mx-auto">
+          <header className="text-center max-w-3xl mx-auto mb-8">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#00ffcc] to-[#0077ff] drop-shadow-sm mb-3">
+              Create Stunning Instagram & Meme Posts
+            </h2>
+            <p className="text-sm md:text-base text-gray-400">
+              Customize memes with editable text, stylish overlays, and vivid
+              backgrounds. Designed for creators who want speed and style.
+            </p>
+          </header>
 
-      {/* Meme template selector */}
-        <div className="mb-2">
-          <label className="text-[#00ffcc]">Choose Meme Template:</label>
-          <select
-            onChange={(e) => handleTemplateSelect(parseInt(e.target.value))}
-            className="ml-2 bg-[#1a1a1a] text-white border border-[#00ffcc]/50 p-2 rounded"
-          >
-            <option value="">-- Select a template --</option>
-            {memeTemplates.map((template, index) => (
-              <option key={index} value={index}>
-                {template.name}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left Panel */}
+            <div className="lg:w-1/2 space-y-6 overflow-y-auto max-h-[90vh] pr-2 scrollbar-thin scrollbar-thumb-[#00ffcc66]">
+              <div className="bg-[#141414] border border-[#00ffcc33] p-4 rounded-lg shadow-lg">
+                <h3 className="text-lg font-semibold text-[#00ffcc] mb-4">
+                  🖼️ Select Meme Template
+                </h3>
 
-        {/* Upload image */}
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          className="text-white bg-[#1a1a1a] p-2 rounded mb-4"
-        />
-
-        {/* Text boxes editor */}
-        {textBoxes.map((box, index) => (
-          <div
-            key={index}
-            className="bg-[#1a1a1a] p-3 rounded border border-[#00ffcc]/30 w-full max-w-xl"
-          >
-            <label className="text-sm text-[#00ffcc]">Text #{index + 1}</label>
-            <input
-              type="text"
-              value={box.text}
-              onChange={(e) => updateBox(index, "text", e.target.value)}
-              className="w-full p-2 mt-1 mb-2 bg-[#0f0f0f] text-white border border-[#00ffcc]/20 rounded"
-            />
-            <label className="text-sm text-[#00ffcc]">
-              Position (% from top):
-            </label>
-            <input
-              type="range"
-              min={0}
-              max={100}
-              value={box.positionPercent}
-              onChange={(e) =>
-                updateBox(index, "positionPercent", Number(e.target.value))
-              }
-              className="w-full"
-            />
-            <p className="text-xs text-gray-400 mb-2">{box.positionPercent}%</p>
-
-            <div className="mt-2 flex flex-col gap-2 text-sm">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={box.showBackground}
-                  onChange={(e) =>
-                    updateBox(index, "showBackground", e.target.checked)
-                  }
-                />{" "}
-                Show background
-              </label>
-
-              {box.showBackground && (
-                <div className="flex gap-4 items-center flex-wrap">
-                  <label>BG Color:</label>
-                  <input
-                    type="color"
-                    value={box.backgroundColor}
+                <div className="flex flex-wrap gap-8 items-center">
+                  <select
                     onChange={(e) =>
-                      updateBox(index, "backgroundColor", e.target.value)
+                      handleTemplateSelect(parseInt(e.target.value))
                     }
-                  />
+                    className="w-48 bg-[#1a1a1a] text-white border border-[#00ffcc55] p-2 rounded outline-none focus:ring-2 focus:ring-[#00ffcc]"
+                  >
+                    <option value="">-- Choose template --</option>
+                    {memeTemplates.map((template, index) => (
+                      <option key={index} value={index}>
+                        {template.name}
+                      </option>
+                    ))}
+                  </select>
 
-                  <label>Opacity:</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="file:bg-[#00ffcc] file:text-black file:font-bold file:px-4 file:py-2 file:rounded file:cursor-pointer hover:file:bg-[#00e6b8] transition"
+                  />
+                </div>
+              </div>
+
+              {textBoxes.map((box, index) => (
+                <div
+                  key={index}
+                  className="bg-[#161616] p-4 rounded-lg border border-[#00ffcc22] w-full shadow animate-fade-in relative"
+                >
+                  {textBoxes.length > 1 && (
+                    <button
+                      className="absolute top-2 right-2 text-red-500 hover:text-red-400"
+                      onClick={() => handleRemoveTextBox(index)}
+                    >
+                      ❌
+                    </button>
+                  )}
+                  <label className="block text-[#00ffcc] text-sm font-semibold mb-1">
+                    Text #{index + 1}
+                  </label>
+                  <input
+                    type="text"
+                    value={box.text}
+                    onChange={(e) => updateBox(index, "text", e.target.value)}
+                    className="w-full p-2 bg-[#0f0f0f] text-white border border-[#00ffcc33] rounded mb-2"
+                  />
+                  <label className="text-[#00ffcc] text-sm">
+                    Vertical Position
+                  </label>
                   <input
                     type="range"
                     min={0}
-                    max={1}
-                    step={0.05}
-                    value={box.backgroundOpacity}
+                    max={100}
+                    value={box.positionPercent}
                     onChange={(e) =>
                       updateBox(
                         index,
-                        "backgroundOpacity",
-                        parseFloat(e.target.value)
+                        "positionPercent",
+                        Number(e.target.value)
                       )
                     }
+                    className="w-full mb-1"
                   />
-                  <span>{Math.round(box.backgroundOpacity * 100)}%</span>
+                  <p className="text-xs text-gray-500">
+                    {box.positionPercent}%
+                  </p>
+                  <div className="mt-2 space-y-2">
+                    <label className="text-sm">
+                      <input
+                        type="checkbox"
+                        checked={box.showBackground}
+                        onChange={(e) =>
+                          updateBox(index, "showBackground", e.target.checked)
+                        }
+                      />{" "}
+                      Show background box
+                    </label>
+                    {box.showBackground && (
+                      <div className="flex flex-wrap gap-4 items-center text-sm">
+                        <label>BG Color:</label>
+                        <input
+                          type="color"
+                          value={box.backgroundColor}
+                          onChange={(e) =>
+                            updateBox(index, "backgroundColor", e.target.value)
+                          }
+                        />
+                        <label>Opacity:</label>
+                        <input
+                          type="range"
+                          min={0}
+                          max={1}
+                          step={0.05}
+                          value={box.backgroundOpacity}
+                          onChange={(e) =>
+                            updateBox(
+                              index,
+                              "backgroundOpacity",
+                              parseFloat(e.target.value)
+                            )
+                          }
+                        />
+                        <span>{Math.round(box.backgroundOpacity * 100)}%</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
+              ))}
+
+              <button
+                onClick={handleAddTextBox}
+                className="px-4 py-2 mt-2 rounded border border-[#00ffcc] text-[#00ffcc] hover:bg-[#00ffcc22] transition"
+              >
+                ➕ Add Text Box
+              </button>
+
+              <div className="flex flex-wrap gap-4 mt-4">
+                <div>
+                  <label className="text-[#00ffcc]">Font Size:</label>
+                  <input
+                    type="number"
+                    value={fontSize}
+                    onChange={(e) => setFontSize(Number(e.target.value))}
+                    min={20}
+                    max={100}
+                    className="ml-2 p-1 rounded text-black"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#00ffcc]">Font Weight:</label>
+                  <input
+                    type="number"
+                    value={fontWeight}
+                    onChange={(e) => setFontWeight(Number(e.target.value))}
+                    min={100}
+                    max={900}
+                    step={100}
+                    className="ml-2 p-1 rounded text-black"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#00ffcc]">Text Color:</label>
+                  <input
+                    type="color"
+                    value={textColor}
+                    onChange={(e) => setTextColor(e.target.value)}
+                    className="ml-2"
+                  />
+                </div>
+                <div>
+                  <label className="text-[#00ffcc]">Background Color:</label>
+                  <input
+                    type="color"
+                    value={bgColor}
+                    onChange={(e) => setBgColor(e.target.value)}
+                    className="ml-2"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Right Panel (Canvas) */}
+            <div className="lg:w-1/2 flex flex-col items-center">
+              <canvas
+                ref={canvasRef}
+                className="mx-auto border-2 border-[#00ffcc] shadow-xl w-full max-w-[480px] aspect-square"
+              />
+              <button
+                onClick={handleDownload}
+                className="mt-6 bg-gradient-to-r from-[#00ffcc] to-[#0077ff] text-black px-6 py-2 rounded font-bold shadow hover:brightness-110 transition"
+              >
+                ⬇️ Download Image
+              </button>
+              {downloadURL && (
+                <a
+                  href={downloadURL}
+                  download="instagram-post.png"
+                  className="mt-2 text-sm text-[#00ffcc] hover:underline"
+                >
+                  Click to download
+                </a>
               )}
             </div>
           </div>
-        ))}
-
-        {/* Add new text box */}
-        <button
-          onClick={handleAddTextBox}
-          className="bg-[#222] border border-[#00ffcc] text-[#00ffcc] px-4 py-2 rounded mt-2"
-        >
-          ➕ Add Text Box
-        </button>
-
-        {/* Text and style settings */}
-        <div className="flex flex-wrap justify-center gap-6 mt-4">
-          <div>
-            <label className="text-[#00ffcc]">Font Size:</label>
-            <input
-              type="number"
-              value={fontSize}
-              onChange={(e) => setFontSize(Number(e.target.value))}
-              min={20}
-              max={100}
-              className="ml-2 text-black p-1"
-            />
-          </div>
-          <div>
-            <label className="text-[#00ffcc]">Font Weight:</label>
-            <input
-              type="number"
-              value={fontWeight}
-              onChange={(e) => setFontWeight(Number(e.target.value))}
-              min={100}
-              max={900}
-              step={100}
-              className="ml-2 text-black p-1"
-            />
-          </div>
-          <div>
-            <label className="text-[#00ffcc]">Text Color:</label>
-            <input
-              type="color"
-              value={textColor}
-              onChange={(e) => setTextColor(e.target.value)}
-              className="ml-2"
-            />
-          </div>
-          <div>
-            <label className="text-[#00ffcc]">Background Color:</label>
-            <input
-              type="color"
-              value={bgColor}
-              onChange={(e) => setBgColor(e.target.value)}
-              className="ml-2"
-            />
-          </div>
         </div>
-
-        {/* Canvas */}
-        <canvas
-          ref={canvasRef}
-          style={{ border: "2px solid #00ffcc", maxWidth: "100%" }}
-        />
-
-        {/* Download button */}
-        <button
-          onClick={handleDownload}
-          className="mt-4 bg-[#00ffcc] text-black font-semibold px-4 py-2 rounded hover:bg-[#00e6b8]"
-        >
-          ⬇️ Download Image
-        </button>
-
-        {downloadURL && (
-          <a
-            href={downloadURL}
-            download="instagram-post.png"
-            className="mt-4 text-[#00ffcc] text-sm"
-          >
-            Click here to download the image
-          </a>
-        )}
       </div>
+      <Footer />
     </>
   );
 };
