@@ -22,9 +22,15 @@ function App() {
           element={
             <>
               <Navbar />
-              <Hero />
-              <Tools />
-              <WhyMicrowrk />
+              <section id="hero">
+                <Hero />
+              </section>
+              <section id="tools">
+                <Tools />
+              </section>
+              <section id="why">
+                <WhyMicrowrk />
+              </section>
               <Footer />
             </>
           }
@@ -32,7 +38,7 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route
-          path="/youtube-chapter-downloader"
+          path="/youtubechapterdownloader"
           element={<YouTubeChapterDownloader />}
         />
         <Route

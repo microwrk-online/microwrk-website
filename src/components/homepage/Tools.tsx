@@ -31,7 +31,7 @@ const tools = [
     title: "🎥 YouTube Chapter Downloader",
     description: "Download YouTube videos chapter-wise or full.",
     status: "Live",
-    link: "/youtube-chapter-downloader",
+    link: "/youtubechapterdownloader/",
   },
 ];
 
