@@ -1,18 +1,26 @@
-// components/homepage/FeaturedTools.tsx
-
+// components/homepage/Tools.tsx
 
 const tools = [
   {
-    title: "📸 instagram meme generator",
-    description: "Create eye-catching memes and stylish Instagram posts with editable text, backgrounds, colors, and more. Perfect for content creators and social media managers.",
+    title: "💻 Telegram Bot Panel",
+    description:
+      "Control your PC remotely using Telegram: take screenshots, upload files, and more.",
+    status: "Coming Soon",
+    link: "", //we can use "/tools/telegram-panel" after making more tools in future
+  },
+  {
+    title: "📸 Instagram Post Generator",
+    description:
+      "Create eye-catching memes and stylish Instagram posts with editable text, backgrounds, colors, and more. Perfect for content creators and social media managers.",
     status: "Live",
-    link: "/tools/InstagramPostGenerator",
+    link: "/instagram-post-generator",
   },
   {
     title: "⏰ Daily Reminder Bot",
-    description: "Set one-time or recurring reminders, get pinged daily via web or Telegram.",
-    status: "Live",
-    link: "/tools/reminder-bot",
+    description:
+      "Set one-time or recurring reminders, get pinged daily via web or Telegram.",
+    status: "Coming Soon",
+    link: "",
   },
   {
     title: "🔒 Password Generator",
@@ -22,16 +30,21 @@ const tools = [
   {
     title: "🎥 YouTube Chapter Downloader",
     description: "Download YouTube videos chapter-wise or full.",
-    status: "Coming Soon",
+    status: "Live",
+    link: "/youtube-chapter-downloader",
   },
 ];
 
-const FeaturedTools = () => {
+const Tools = () => {
   return (
     <section id="tools" className="bg-neutral-950 text-white py-20 px-6">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-4 text-[#00ffcc]">Featured Tools</h2>
-        <p className="text-gray-400 mb-12">A growing collection of utilities to boost your daily productivity.</p>
+        <h2 className="text-4xl font-bold mb-4 text-[#00ffcc]">
+          Featured Tools
+        </h2>
+        <p className="text-gray-400 mb-12">
+          A growing collection of utilities to boost your daily productivity.
+        </p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8">
           {tools.map((tool, index) => (
@@ -39,7 +52,9 @@ const FeaturedTools = () => {
               key={index}
               className="bg-neutral-800 p-6 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.01] transition"
             >
-              <h3 className="text-2xl font-semibold mb-2 text-white">{tool.title}</h3>
+              <h3 className="text-2xl font-semibold mb-2 text-white">
+                {tool.title}
+              </h3>
               <p className="text-gray-400 mb-4">{tool.description}</p>
               {tool.status === "Live" ? (
                 <a
@@ -61,4 +76,4 @@ const FeaturedTools = () => {
   );
 };
 
-export default FeaturedTools;
+export default Tools;
