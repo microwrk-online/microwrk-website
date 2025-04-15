@@ -1,13 +1,16 @@
 import type React from "react";
-// @ts-ignore this is base layout file we can add the change after the backend is ready for this
 import { useState } from "react";
 import Navbar from "../../homepage/Navbar";
-
 import { Download, Loader2 } from "lucide-react";
 
 interface Chapter {
   title: string;
-  timestamp: string;
+  start_time: number;
+  end_time?: number;
+  duration: string;
+  size: string;
+  mp4_download_url: string;
+  mp3_download_url: string;
 }
 
 const YouTubeChapterDownloader: React.FC = () => {
@@ -17,12 +20,25 @@ const YouTubeChapterDownloader: React.FC = () => {
 
   const fetchChapters = async (videoUrl: string) => {
     setLoading(true);
-    const response = await fetch(
-      `https://example.com/api/chapters?url=${videoUrl}`
-    );
-    const data = await response.json();
-    setChapters(data);
-    setLoading(false);
+    try {
+      const response = await fetch("http://15.235.186.120:8000/api/extract", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: videoUrl }),
+      });
+
+      if (!response.ok) throw new Error("Failed to extract video");
+
+      const data = await response.json();
+      setChapters(data.chapters);
+    } catch (err) {
+      console.error("Error fetching chapters:", err);
+      alert("Could not extract video chapters.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -30,19 +46,6 @@ const YouTubeChapterDownloader: React.FC = () => {
     if (url.trim()) {
       fetchChapters(url);
     }
-  };
-
-  const downloadChapter = (chapter: Chapter) => {
-    const text = `${chapter.timestamp} - ${chapter.title}`;
-    const blob = new Blob([text], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${chapter.title}.mp4`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
   };
 
   return (
@@ -97,19 +100,34 @@ const YouTubeChapterDownloader: React.FC = () => {
                 {chapters.map((chapter, index) => (
                   <div
                     key={index}
-                    className="p-3 hover:bg-[#252525] rounded-lg transition-colors duration-150 flex items-start gap-3"
+                    className="p-3 hover:bg-[#252525] rounded-lg transition-colors duration-150 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                   >
-                    <div className="text-emerald-400 font-mono mr-3">
-                      {chapter.timestamp}
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                      <div className="text-emerald-400 font-mono">
+                        {chapter.duration}
+                      </div>
+                      <div className="text-gray-300">{chapter.title}</div>
                     </div>
-                    <div className="text-gray-300">{chapter.title}</div>
-                    <button
-                      onClick={() => downloadChapter(chapter)}
-                      className="flex-1 border-[#333] text-gray-300 hover:bg-[#252525] hover:text-emerald-400 rounded-lg py-2 px-4 flex items-center"
-                    >
-                      <Download className="mr-2 h-4 w-4" />
-                      "mp4"
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() =>
+                          window.open(chapter.mp4_download_url, "_blank")
+                        }
+                        className="border border-[#333] text-gray-300 hover:bg-[#252525] hover:text-emerald-400 rounded-lg py-1 px-3 text-sm flex items-center"
+                      >
+                        <Download className="mr-1 h-4 w-4" />
+                        MP4
+                      </button>
+                      <button
+                        onClick={() =>
+                          window.open(chapter.mp3_download_url, "_blank")
+                        }
+                        className="border border-[#333] text-gray-300 hover:bg-[#252525] hover:text-cyan-400 rounded-lg py-1 px-3 text-sm flex items-center"
+                      >
+                        <Download className="mr-1 h-4 w-4" />
+                        MP3
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -117,9 +135,8 @@ const YouTubeChapterDownloader: React.FC = () => {
           )}
         </div>
 
-        <footer className="mt-8 text-gray-500 text-sm">
-          A modern utility tool for YouTube content creators. Open source and
-          free.
+        <footer className="mt-8 text-gray-500 text-sm text-center">
+          A modern utility tool for YouTube content creators. Open source and free.
         </footer>
       </div>
     </>

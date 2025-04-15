@@ -38,7 +38,7 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route
-          path="/youtubechapterdownloader"
+          path="/youtube-chapter-downloader"
           element={<YouTubeChapterDownloader />}
         />
         <Route
