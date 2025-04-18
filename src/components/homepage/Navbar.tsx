@@ -10,7 +10,7 @@ const Navbar = () => {
     { name: "Home", href: "hero" },
     { name: "Tools", href: "tools" },
     { name: "Why Microwrk", href: "why" },
-  ]; //contents in this 
+  ]; //contents in this
 
   const externalNavLinks = [
     {
@@ -18,6 +18,7 @@ const Navbar = () => {
       href: "https://t.me/microwrk_online",
       external: true,
     },
+    { name: "Water Wash", href: "waterwash", external: false },
   ];
 
   const scrollToSection = (id: string) => {
