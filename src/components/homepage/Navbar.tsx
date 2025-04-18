@@ -18,7 +18,7 @@ const Navbar = () => {
       href: "https://t.me/microwrk_online",
       external: true,
     },
-    { name: "Water Wash", href: "waterwash" },
+    { name: "Water Wash", href: "waterwash", external: false },
   ];
 
   const scrollToSection = (id: string) => {
