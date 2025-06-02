@@ -19,6 +19,8 @@ const Navbar = () => {
       external: true,
     },
     { name: "Water Wash", href: "waterwash", external: false },
+    { name: "Events", href: "events", external: false },
+    { name: "Zen Stream", href: "zenstream", external: false },
   ];
 
   const scrollToSection = (id: string) => {

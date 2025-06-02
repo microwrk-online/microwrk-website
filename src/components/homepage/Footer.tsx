@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaTelegram, FaGithub, FaLinkedin } from "react-icons/fa";
-import PrivacyPolicy from "../footercontents/Privacy";
-import TermsOfService from "../footercontents/Terms";
+import PrivacyPolicy from "./footercontents/Privacy";
+import TermsOfService from "./footercontents/Terms";
 import Modal from "../common/Modal";
 
 const Footer = () => {
