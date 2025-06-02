@@ -11,7 +11,7 @@ import { Analytics } from "@vercel/analytics/react";
 import InstagramPostGenerator from "./components/Tools/instagram-post-generator/InstagramPostGenerator";
 import WaterWash from "./components/waterwash/WaterWash";
 import Sstv from "./components/sstv/Sstv";
-import Zenstream from "./components/zenstream/zenstream.tsx";
+import Zenstream from "./components/zenstream/Zenstream.tsx";
 
 // import CompetitionsHome from "./components/trio-25/CompetitionsHome";
 // import MemoryVerseForm from "./components/trio-25/eventsPage/MemoryVerseForm";
