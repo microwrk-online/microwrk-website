@@ -75,3 +75,11 @@ html {
 .animate-pulse-slow {
   animation: pulse-slow 4s infinite;
 }
+
+/* this is for zen-stream */
+
+html,
+body,
+#root {
+  @apply h-full w-full overflow-hidden;
+}
