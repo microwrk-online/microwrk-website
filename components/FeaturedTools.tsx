@@ -41,7 +41,7 @@ const FeaturedTools = () => {
   ];
 
   return (
-    <section id="featured-tools" className="py-20 px-4">
+    <section id="tools" className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">

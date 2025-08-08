@@ -1,36 +1,110 @@
-'use client';
+"use client"; // Required for interactivity and hooks
+
+import { useCallback } from "react";
+import { FaLock, FaRobot, FaRocket } from "react-icons/fa";
+import { Typewriter } from "react-simple-typewriter";
+import Particles from "react-tsparticles";
+import { Engine } from "tsparticles-engine";
+import { loadFull } from "tsparticles";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
+  const router = useRouter();
+
+  // Initialize particles more efficiently with useCallback
+  const particlesInit = useCallback(async (engine: Engine) => {
+    // await loadFull(engine); // This throws an error in production
+  }, []);
+
   const scrollToTools = () => {
-    const toolsSection = document.getElementById('featured-tools');
+    const toolsSection = document.getElementById("tools");
     if (toolsSection) {
-      toolsSection.scrollIntoView({ behavior: 'smooth' });
+      toolsSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // If not on homepage, navigate to tools section
+      router.push("/#tools");
     }
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 pt-16">
-      <div className="text-center max-w-4xl mx-auto">
-        {/* Main Headline */}
-        <h1 className="text-5xl md:text-7xl font-bold text-[#00f2a9] mb-6">
-          microwrk.online
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center px-6 bg-neutral-900 text-white overflow-hidden"
+    >
+      {/* Floating Icons */}
+      <div className="absolute top-10 left-5 text-[#00ffcc] opacity-10 text-5xl animate-bounce-slow">
+        <FaRocket />
+      </div>
+      <div className="absolute bottom-10 right-10 text-[#00ffcc] opacity-10 text-5xl animate-pulse-slow">
+        <FaLock />
+      </div>
+      <div className="absolute top-1/3 right-1/4 text-[#00ffcc] opacity-10 text-5xl animate-float">
+        <FaRobot />
+      </div>
+
+      {/* Particle Background */}
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+          background: { color: { value: "#111827" } },
+          fpsLimit: 60,
+          interactivity: {
+            events: {
+              onHover: { enable: true, mode: "repulse" },
+              resize: true,
+            },
+            modes: { repulse: { distance: 100, duration: 0.4 } },
+          },
+          particles: {
+            color: { value: "#00ffcc" },
+            links: {
+              enable: true,
+              color: "#00ffcc",
+              distance: 150,
+              opacity: 0.5,
+            },
+            move: { enable: true, speed: 1.5 },
+            number: { value: 60 },
+            size: { value: 2 },
+          },
+        }}
+        className="absolute inset-0 -z-10"
+      />
+
+      {/* Main content */}
+      <div className="text-center max-w-3xl z-10">
+        <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
+          <span className="text-[#00ffcc]">microwrk.online</span>
+          <br />
+          <span className="h-24 inline-block">
+            {" "}
+            {/* Added fixed height for layout stability */}
+            <Typewriter
+              words={[
+                "Modern Tools for Modern Hackers 🧠",
+                "Automate daily tasks ⏳",
+                "Free developer utilities 🛠️",
+                "No sign-ups, just tools 📦",
+              ]}
+              loop={true}
+              cursor
+              cursorStyle="_"
+              typeSpeed={50}
+              deleteSpeed={30}
+              delaySpeed={2000}
+            />
+          </span>
         </h1>
-        
-        {/* Subheading with emoji */}
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 flex items-center justify-center gap-3 flex-wrap">
-          Automate daily tasks
-          <span className="text-4xl md:text-6xl">⏳</span>
-        </h2>
-        
-        {/* Description */}
-        <p className="text-lg md:text-xl text-[#aaaaaa] mb-12 max-w-2xl mx-auto leading-relaxed">
-          Explore our free utilities — from Telegram PC control to YouTube chapter downloads.
+        <p className="text-lg text-gray-400 mb-6 mt-2">
+          Explore our free utilities — from Telegram PC control to YouTube
+          chapter downloads.
         </p>
-        
+
         {/* CTA Button */}
         <button
           onClick={scrollToTools}
-          className="bg-[#00f2a9] text-black font-semibold text-lg px-8 py-4 rounded-lg hover:bg-[#00d694] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+          className="inline-block px-8 py-3 bg-[#00ffcc] text-black font-semibold rounded-lg shadow-lg hover:scale-105 transition transform duration-300"
         >
           Browse Tools
         </button>

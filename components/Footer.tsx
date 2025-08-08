@@ -82,6 +82,13 @@ const Footer = () => {
       >
         {modalType === "privacy" ? <PrivacyPolicy /> : <TermsOfService />}
       </Modal>
+
+      {/* Contributor */}
+      <div className="text-center text-base mt-4">
+        <span>Created by: Joshua Daniel,</span>
+        <span>&nbsp;</span>
+        <span>Guru Prasath</span>
+      </div>
     </footer>
   );
 };
