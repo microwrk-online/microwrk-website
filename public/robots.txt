@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /admin/
-Disallow: /login/
-Allow: /
-Sitemap: https://microwrk.online/sitemap.xml
