@@ -1,42 +1,48 @@
-'use client';
+"use client";
 
 const FeaturedTools = () => {
   const tools = [
     {
-      title: '🤖 Telegram Bot Panel',
-      description: 'Control your PC remotely through Telegram bot commands with advanced automation features.',
-      status: 'coming-soon',
-      buttonText: 'Coming Soon'
+      title: "🤖 Telegram Bot Panel",
+      description:
+        "Control your PC remotely through Telegram bot commands with advanced automation features.",
+      status: "coming-soon",
+      buttonText: "Coming Soon",
     },
     {
-      title: '📸 Instagram Post Generator',
-      description: 'Create stunning Instagram posts with AI-powered design templates and automatic text generation.',
-      status: 'available',
-      buttonText: 'Try Tool'
+      title: "📸 Instagram Post Generator",
+      description:
+        "Create stunning Instagram posts with AI-powered design templates and automatic text generation.",
+      status: "available",
+      buttonText: "Try Tool",
     },
     {
-      title: '⏰ Daily Reminder Bot',
-      description: 'Never forget important tasks with smart reminders sent directly to your preferred channels.',
-      status: 'coming-soon',
-      buttonText: 'Coming Soon'
+      title: "⏰ Daily Reminder Bot",
+      description:
+        "Never forget important tasks with smart reminders sent directly to your preferred channels.",
+      status: "coming-soon",
+      buttonText: "Coming Soon",
     },
     {
-      title: '📊 Data Analysis Bot',
-      description: 'Analyze your data effortlessly with our Telegram bot that provides insights and visualizations.',
-      status: 'available',
-      buttonText: 'Try Tool'
+      title: "📊 Data Analysis Bot",
+      description:
+        "Analyze your data effortlessly with our Telegram bot that provides insights and visualizations.",
+      status: "available",
+      buttonText: "Try Tool",
     },
     {
-      title: '🌐 URL Shortener Bot',
-      description: 'Shorten and manage your URLs directly from Telegram with advanced tracking features.',
-      status: 'available',
-      buttonText: 'Try Tool'
+      title: "🌐 URL Shortener Bot",
+      description:
+        "Shorten and manage your URLs directly from Telegram with advanced tracking features.",
+      status: "available",
+      buttonText: "Try Tool",
     },
     {
-      title: '🎥 YouTube Chapter Downloader',
-      description: 'Download YouTube videos by chapters or extract specific timestamps with ease.',
-      status: 'available',
-      buttonText: 'Try Tool'
+      title: "🎥 YouTube Chapter Downloader",
+      description:
+        "Download YouTube videos by chapters or extract specific timestamps with ease.",
+      status: "available",
+      buttonText: "Try Tool",
     },
   ];
 
@@ -49,7 +55,8 @@ const FeaturedTools = () => {
             Featured Tools
           </h2>
           <p className="text-lg md:text-xl text-[#aaaaaa] max-w-2xl mx-auto">
-            Discover our collection of powerful automation tools designed to simplify your daily workflow and boost productivity.
+            Discover our collection of powerful automation tools designed to
+            simplify your daily workflow and boost productivity.
           </p>
         </div>
 
@@ -64,20 +71,21 @@ const FeaturedTools = () => {
               <h3 className="text-xl font-semibold text-white mb-4">
                 {tool.title}
               </h3>
-              
+
               {/* Tool Description */}
               <p className="text-[#aaaaaa] mb-6 leading-relaxed">
                 {tool.description}
               </p>
-              
+
               {/* Action Button */}
               <button
                 className={`w-full py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
-                  tool.status === 'available'
-                    ? 'bg-[#00f2a9] font-semibold text-black hover:bg-[#00d694] hover:shadow-lg'
-                    : 'bg-gray-700 text-gray-300 cursor-not-allowed'
+                  tool.status === "available"
+                    ? "bg-[#00ffcc] font-semibold text-black hover:bg-[#00d694] hover:shadow-lg"
+                    : "bg-gray-700 text-gray-300 cursor-not-allowed"
                 }`}
-                disabled={tool.status === 'coming-soon'}
+                disabled={tool.status === "coming-soon"}
+                onClick={() => (window.location.href = "/")}
               >
                 {tool.buttonText}
               </button>

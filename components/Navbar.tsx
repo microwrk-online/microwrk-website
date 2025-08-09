@@ -68,7 +68,7 @@ const Navbar = () => {
             className="mr-2 self-center"
             priority // optional for above-the-fold images
           />
-          microwrk
+          microwrk <p className="ml-2 inline-block text-sm">Beta</p>
         </button>
 
         {/* Desktop Nav */}

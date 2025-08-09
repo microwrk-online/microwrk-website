@@ -75,7 +75,7 @@ const Hero = () => {
       {/* Main content */}
       <div className="text-center max-w-3xl z-10">
         <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
-          <span className="text-[#00ffcc]">microwrk.online</span>
+          <span className="text-[#00ffcc]">microwrk.online <p className="sm:inline-block text-xl">Beta</p></span>
           <br />
           <span className="h-24 inline-block">
             {" "}
