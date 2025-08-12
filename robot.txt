@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Block internal Next.js build files
+Disallow: /_next/
+Disallow: /static/
+Disallow: /api/
+
+# Block private files/folders (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /server/
+
+Sitemap: https://microwrk.online/sitemap.xml

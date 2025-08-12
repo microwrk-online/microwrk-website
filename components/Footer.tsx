@@ -6,7 +6,6 @@ import PrivacyPolicy from "./footerContents/Privacy";
 import TermsOfService from "./footerContents/Terms";
 import Modal from "./Modal";
 
-
 const Footer = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"privacy" | "terms" | null>(null);
@@ -86,9 +85,26 @@ const Footer = () => {
 
       {/* Contributor */}
       <div className="text-center text-base mt-4">
-        <span>Created by: Joshua Daniel,</span>
+        <span className="text-gray-500">
+          © {new Date().getFullYear()} microwrk.online | Built with ❤️ by{" "}
+        </span>
+        <a
+          href="https://www.linkedin.com/in/joshuadaniel8090"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:underline transition"
+        >
+          Joshua Daniel,
+        </a>
         <span>&nbsp;</span>
-        <span>Guru Prasath</span>
+        <a
+          href="https://example.com/guru-prasath"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:underline transition"
+        >
+          Guru Prasath
+        </a>
       </div>
     </footer>
   );

@@ -30,6 +30,11 @@ const modes: { key: Mode; label: string; icon: React.ElementType }[] = [
   { key: "phone", label: "Phone", icon: Smartphone },
 ];
 
+export const metadata = {
+  title: "YouTube Chapter Downloader - Microwrk",
+  description: "Download YouTube chapters as separate videos instantly.",
+};
+
 export default function QRGenerator() {
   const [mode, setMode] = useState<Mode>("url");
   const [url, setUrl] = useState("");
