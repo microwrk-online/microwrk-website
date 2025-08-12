@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://microwrk.online"), // ✅ Your live domain
   title: "Microwrk Online - Automate Daily Tasks",
   description:
     "Explore our free utilities — from Telegram PC control to YouTube chapter downloads. Automate your daily workflow with powerful tools.",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     siteName: "Microwrk Online",
     images: [
       {
-        url: "/og-image.jpg", // Create this image (1200x630px recommended)
+        url: "./og-image.png", // Create this image (1200x630px recommended)
         width: 1200,
         height: 630,
         alt: "Microwrk Online Tools",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     creator: "@microwrk",
     title: "Microwrk Online - Automate Daily Tasks",
     description: "Free automation tools for productivity.",
-    images: ["/og-image.jpg"],
+    images: ["./og-image.png"],
   },
 };
 

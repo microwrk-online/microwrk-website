@@ -64,7 +64,7 @@ const Navbar = () => {
             src={logo}
             alt="microwrk"
             width={40} // matches your w-10 class (10 * 4 = 40px)
-            height={40} // matches your h-10 class
+            // height={40} // if you add this then there will be a console error
             className="mr-2 self-center"
             priority // optional for above-the-fold images
           />
