@@ -6,6 +6,7 @@ import PrivacyPolicy from "./footerContents/Privacy";
 import TermsOfService from "./footerContents/Terms";
 import Modal from "./Modal";
 
+
 const Footer = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"privacy" | "terms" | null>(null);

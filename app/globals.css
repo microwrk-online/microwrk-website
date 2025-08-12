@@ -80,3 +80,26 @@
     @apply bg-background text-foreground;
   }
 }
+input[type="color"] {
+  appearance: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 8px;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: 2px solid #444;
+  border-radius: 8px;
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: 2px solid #444;
+  border-radius: 8px;
+}

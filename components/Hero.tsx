@@ -3,17 +3,14 @@
 import { useCallback } from "react";
 import { FaLock, FaRobot, FaRocket } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
-import Particles from "react-tsparticles";
-import { Engine } from "tsparticles-engine";
-import { loadFull } from "tsparticles";
 import { useRouter } from "next/navigation";
+import Animated3DBox from "./animation";
 
 const Hero = () => {
   const router = useRouter();
 
-  // Initialize particles more efficiently with useCallback
-  const particlesInit = useCallback(async (engine: Engine) => {
-    // await loadFull(engine); // This throws an error in production
+  const particlesInit = useCallback(async () => {
+    // Particles init removed for production safety
   }, []);
 
   const scrollToTools = () => {
@@ -21,7 +18,6 @@ const Hero = () => {
     if (toolsSection) {
       toolsSection.scrollIntoView({ behavior: "smooth" });
     } else {
-      // If not on homepage, navigate to tools section
       router.push("/#tools");
     }
   };
@@ -29,7 +25,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center px-6 bg-neutral-900 text-white overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 bg-neutral-900 text-white overflow-hidden"
     >
       {/* Floating Icons */}
       <div className="absolute top-10 left-5 text-[#00ffcc] opacity-10 text-5xl animate-bounce-slow">
@@ -42,50 +38,20 @@ const Hero = () => {
         <FaRobot />
       </div>
 
-      {/* Particle Background */}
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          background: { color: { value: "#111827" } },
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onHover: { enable: true, mode: "repulse" },
-              resize: true,
-            },
-            modes: { repulse: { distance: 100, duration: 0.4 } },
-          },
-          particles: {
-            color: { value: "#00ffcc" },
-            links: {
-              enable: true,
-              color: "#00ffcc",
-              distance: 150,
-              opacity: 0.5,
-            },
-            move: { enable: true, speed: 1.5 },
-            number: { value: 60 },
-            size: { value: 2 },
-          },
-        }}
-        className="absolute inset-0 -z-10"
-      />
-
-      {/* Main content */}
+      {/* Main Hero Content */}
       <div className="text-center max-w-3xl z-10">
         <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
-          <span className="text-[#00ffcc]">microwrk.online <p className="sm:inline-block text-xl">Beta</p></span>
+          <span className="text-[#00ffcc]">
+            microwrk.online <p className="sm:inline-block text-xl">Beta</p>
+          </span>
           <br />
-          <span className="h-24 inline-block">
-            {" "}
-            {/* Added fixed height for layout stability */}
+          <span className="h-24 inline-block whitespace-nowrap">
             <Typewriter
               words={[
-                "Modern Tools for Modern Hackers 🧠",
-                "Automate daily tasks ⏳",
-                "Free developer utilities 🛠️",
-                "No sign-ups, just tools 📦",
+                "Tools for Hackers",
+                "Automate Tasks",
+                "Free Utilities",
+                "No Sign-ups Needed",
               ]}
               loop={true}
               cursor
@@ -108,6 +74,68 @@ const Hero = () => {
         >
           Browse Tools
         </button>
+      </div>
+
+      {/* Extra Filler Content */}
+      <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-5xl mx-auto text-gray-300 z-10">
+        <div className="bg-neutral-800 p-6 rounded-xl shadow hover:shadow-xl transition">
+          <FaRocket className="text-[#00ffcc] text-3xl mb-3" />
+          <h3 className="text-xl font-semibold mb-2">Blazing Fast</h3>
+          <p>
+            Our tools are optimized for speed — no unnecessary loading screens
+            or ads.
+          </p>
+        </div>
+
+        <div className="bg-neutral-800 p-6 rounded-xl shadow hover:shadow-xl transition">
+          <FaLock className="text-[#00ffcc] text-3xl mb-3" />
+          <h3 className="text-xl font-semibold mb-2">Secure & Private</h3>
+          <p>
+            We value your privacy — no tracking, no sign-up, and no shady
+            scripts.
+          </p>
+        </div>
+
+        <div className="bg-neutral-800 p-6 rounded-xl shadow hover:shadow-xl transition">
+          <FaRobot className="text-[#00ffcc] text-3xl mb-3" />
+          <h3 className="text-xl font-semibold mb-2">Automation-Ready</h3>
+          <p>
+            Integrate our tools into your daily workflow and save hours every
+            week.
+          </p>
+        </div>
+      </div>
+
+      {/* About Section */}
+      <div className="mt-24 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10">
+        <div>
+          <h2 className="text-3xl font-bold mb-4">
+            Why Choose microwrk.online?
+          </h2>
+          <p className="text-gray-400 mb-6">
+            We build tools with one goal in mind: making your life easier. From
+            automating repetitive tasks to helping you focus on the important
+            stuff, our utilities are designed for developers, creators, and
+            tech-savvy users who value their time.
+          </p>
+          <ul className="space-y-3 text-gray-300">
+            <li>✅ No logins or paywalls</li>
+            <li>✅ Works on any device</li>
+            <li>✅ Constantly growing tool library</li>
+          </ul>
+        </div>
+        <div className="bg-neutral-800 h-64 rounded-xl flex items-center justify-center text-gray-500">
+          <Animated3DBox />
+        </div>
+      </div>
+
+      {/* Testimonial */}
+      <div className="mt-24 bg-neutral-800 py-10 text-center rounded-xl shadow max-w-5xl mx-auto z-10">
+        <p className="text-xl text-gray-300 italic">
+          &quot;Finally, a site that gives me the tools I need without drowning
+          me in popups.&quot;
+        </p>
+        <span className="text-gray-500">— Jane Doe, Developer</span>
       </div>
     </section>
   );

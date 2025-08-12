@@ -2,52 +2,66 @@
 
 const FeaturedTools = () => {
   const tools = [
+    // {
+    //   title: " Telegram Bot Panel",
+    //   description:
+    //     "Control your PC remotely through Telegram bot commands with advanced automation features.",
+    //   status: "coming-soon",
+    //   buttonText: "Coming Soon",
+    //   id: "telegram-bot-panel",
+    // },
+    // {
+    //   title: " Instagram Post Generator",
+    //   description:
+    //     "Create stunning Instagram posts with AI-powered design templates and automatic text generation.",
+    //   status: "available",
+    //   buttonText: "Try Tool",
+    //   id: "instagram-post-generator",
+    // },
+    // {
+    //   title: " Daily Reminder Bot",
+    //   description:
+    //     "Never forget important tasks with smart reminders sent directly to your preferred channels.",
+    //   status: "coming-soon",
+    //   buttonText: "Coming Soon",
+    //   id: "daily-reminder-bot",
+    // },
+    // {
+    //   title: " Data Analysis Bot",
+    //   description:
+    //     "Analyze your data effortlessly with our Telegram bot that provides insights and visualizations.",
+    //   status: "available",
+    //   buttonText: "Try Tool",
+    //   id: "data-analysis-bot",
+    // },
     {
-      title: "🤖 Telegram Bot Panel",
+      title: " Qr Code Generator",
       description:
-        "Control your PC remotely through Telegram bot commands with advanced automation features.",
-      status: "coming-soon",
-      buttonText: "Coming Soon",
-    },
-    {
-      title: "📸 Instagram Post Generator",
-      description:
-        "Create stunning Instagram posts with AI-powered design templates and automatic text generation.",
+        "Generate and manage QR codes effortlessly. Generate and manage QR codes effortlessly.",
       status: "available",
       buttonText: "Try Tool",
+      id: "qr-code-generator",
     },
     {
-      title: "⏰ Daily Reminder Bot",
-      description:
-        "Never forget important tasks with smart reminders sent directly to your preferred channels.",
-      status: "coming-soon",
-      buttonText: "Coming Soon",
-    },
-    {
-      title: "📊 Data Analysis Bot",
-      description:
-        "Analyze your data effortlessly with our Telegram bot that provides insights and visualizations.",
-      status: "available",
-      buttonText: "Try Tool",
-    },
-    {
-      title: "🌐 URL Shortener Bot",
+      title: " URL Shortener Bot",
       description:
         "Shorten and manage your URLs directly from Telegram with advanced tracking features.",
-      status: "available",
-      buttonText: "Try Tool",
+      status: "Coming Soon",
+      buttonText: "Coming Soon",
+      id: "url-shortener",
     },
     {
-      title: "🎥 YouTube Chapter Downloader",
+      title: " YouTube Chapter Downloader",
       description:
         "Download YouTube videos by chapters or extract specific timestamps with ease.",
-      status: "available",
-      buttonText: "Try Tool",
+      status: "Coming Soon",
+      buttonText: "Coming Soon",
+      id: "youtube-chapter-downloader",
     },
   ];
 
   return (
-    <section id="tools" className="py-20 px-4">
+    <section id="tools" className="py-20 bg-neutral-900 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -85,7 +99,7 @@ const FeaturedTools = () => {
                     : "bg-gray-700 text-gray-300 cursor-not-allowed"
                 }`}
                 disabled={tool.status === "coming-soon"}
-                onClick={() => (window.location.href = "/")}
+                onClick={() => (window.location.href = `/${tool.id}`)}
               >
                 {tool.buttonText}
               </button>
