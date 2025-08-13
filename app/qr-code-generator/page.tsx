@@ -30,14 +30,11 @@ const modes: { key: Mode; label: string; icon: React.ElementType }[] = [
   { key: "phone", label: "Phone", icon: Smartphone },
 ];
 
-<<<<<<< HEAD
 // export const metadata = {
 //   title: "YouTube Chapter Downloader - Microwrk",
 //   description: "Download YouTube chapters as separate videos instantly.",
 // };
 
-=======
->>>>>>> 0b8ab028a2e1783bed7d55927df89a3c7974602e
 export default function QRGenerator() {
   const [mode, setMode] = useState<Mode>("url");
   const [url, setUrl] = useState("");
@@ -118,8 +115,7 @@ export default function QRGenerator() {
   return (
     <>
       <Navbar />
-      {/* ✅ Adjusted min-h so footer never overlaps */}
-      <div className="bg-neutral-900 min-h-[calc(100vh-4rem)]">
+      <div className="max-h-screen min-h-[calc(89vh-4rem)] bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4 py-10">
           {/* Header */}
           <header className="flex justify-between items-center mb-8">
@@ -218,6 +214,22 @@ export default function QRGenerator() {
                 </label>
               </div>
 
+              {/* Size */}
+              {/* <div className="mt-6">
+                <div className="flex justify-between text-sm font-medium text-neutral-300">
+                  <span>Size</span>
+                  <span>{size}px</span>
+                </div>
+                <input
+                  type="range"
+                  min="100"
+                  max="600"
+                  value={size}
+                  onChange={(e) => setSize(Number(e.target.value))}
+                  className="w-full accent-[#00ffcc]"
+                />
+              </div> */}
+
               {/* Error correction */}
               <div className="mt-6">
                 <span className="text-sm font-medium text-neutral-300">
@@ -259,3 +271,101 @@ export default function QRGenerator() {
                       }`}
                     >
                       {f.toUpperCase()}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </motion.aside>
+
+            {/* Right preview */}
+            <main className="lg:col-span-2 flex flex-col items-center justify-center bg-neutral-800 rounded-2xl shadow-lg p-6">
+              <div className="relative rounded-xl">
+                <QRCodeCanvas
+                  className="rounded-xl"
+                  ref={canvasRef}
+                  value={qrValue || " "}
+                  size={size}
+                  fgColor={qrValue ? fg : "#ffffff00"}
+                  bgColor={bg}
+                  level={errorCorrection}
+                  includeMargin
+                  imageSettings={
+                    logo
+                      ? {
+                          src: logo,
+                          excavate: true,
+                          height: size * 0.2,
+                          width: size * 0.2,
+                        }
+                      : undefined
+                  }
+                />
+              </div>
+
+              <div className="flex gap-2 mt-6">
+                <button
+                  onClick={handleDownload}
+                  className="flex items-center gap-2 bg-[#00ffcc] hover:bg-[#00ffccc4] text-black font-medium px-4 py-2 rounded-lg"
+                >
+                  <Download className="w-4 h-4" />
+                  Download
+                </button>
+                <button
+                  onClick={copyToClipboard}
+                  className="flex items-center gap-2 bg-neutral-700 hover:bg-neutral-600 font-medium px-4 py-2 rounded-lg text-white"
+                >
+                  <Copy className="w-4 h-4" />
+                  {copied ? "Copied!" : "Copy"}
+                </button>
+                {share && (
+                  <button
+                    onClick={share}
+                    className="flex items-center gap-2 bg-neutral-700 hover:bg-neutral-600 font-medium px-4 py-2 rounded-lg text-white"
+                  >
+                    <Share2 className="w-4 h-4" />
+                    Share
+                  </button>
+                )}
+              </div>
+
+              {/* Color controls */}
+              <div className="mt-6 w-full max-w-sm">
+                <div className="flex items-center gap-2">
+                  <Palette className="w-4 h-4 text-neutral-300" />
+                  <span className="text-sm font-medium text-neutral-300">
+                    Colors
+                  </span>
+                </div>
+                <div className="flex gap-4 mt-2">
+                  <div className="flex-1">
+                    <label className="text-xs text-neutral-400">
+                      Foreground
+                    </label>
+                    <input
+                      type="color"
+                      value={fg}
+                      onChange={(e) => setFg(e.target.value)}
+                      className="w-full h-8 rounded-lg appearance-none cursor-pointer border-none"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="text-xs text-neutral-400">
+                      Background
+                    </label>
+                    <input
+                      type="color"
+                      value={bg}
+                      onChange={(e) => setBg(e.target.value)}
+                      className="w-full h-8 rounded-lg cursor-pointer"
+                    />
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
+}
