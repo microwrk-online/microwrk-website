@@ -30,11 +30,6 @@ const modes: { key: Mode; label: string; icon: React.ElementType }[] = [
   { key: "phone", label: "Phone", icon: Smartphone },
 ];
 
-// export const metadata = {
-//   title: "YouTube Chapter Downloader - Microwrk",
-//   description: "Download YouTube chapters as separate videos instantly.",
-// };
-
 export default function QRGenerator() {
   const [mode, setMode] = useState<Mode>("url");
   const [url, setUrl] = useState("");
@@ -115,7 +110,8 @@ export default function QRGenerator() {
   return (
     <>
       <Navbar />
-      <div className="max-h-screen min-h-[calc(89vh-4rem)] bg-neutral-900">
+      {/* ✅ Adjusted min-h so footer never overlaps */}
+      <div className="bg-neutral-900 min-h-[calc(100vh-4rem)]">
         <div className="max-w-7xl mx-auto px-4 py-10">
           {/* Header */}
           <header className="flex justify-between items-center mb-8">
@@ -214,22 +210,6 @@ export default function QRGenerator() {
                 </label>
               </div>
 
-              {/* Size */}
-              {/* <div className="mt-6">
-                <div className="flex justify-between text-sm font-medium text-neutral-300">
-                  <span>Size</span>
-                  <span>{size}px</span>
-                </div>
-                <input
-                  type="range"
-                  min="100"
-                  max="600"
-                  value={size}
-                  onChange={(e) => setSize(Number(e.target.value))}
-                  className="w-full accent-[#00ffcc]"
-                />
-              </div> */}
-
               {/* Error correction */}
               <div className="mt-6">
                 <span className="text-sm font-medium text-neutral-300">
@@ -302,7 +282,7 @@ export default function QRGenerator() {
                 />
               </div>
 
-              <div className="flex gap-2 mt-6">
+              <div className="flex gap-2 mt-6 flex-wrap justify-center">
                 <button
                   onClick={handleDownload}
                   className="flex items-center gap-2 bg-[#00ffcc] hover:bg-[#00ffccc4] text-black font-medium px-4 py-2 rounded-lg"
