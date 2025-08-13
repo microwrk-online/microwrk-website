@@ -135,7 +135,7 @@ const Hero = () => {
           &quot;Finally, a site that gives me the tools I need without drowning
           me in popups.&quot;
         </p>
-        <span className="text-gray-500">— Jane Doe, Developer</span>
+        <span className="text-gray-">— Jane Doe, Developer</span>
       </div>
     </section>
   );
